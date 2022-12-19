@@ -7,7 +7,7 @@ function Navbars() {
      return (
        <Navbar expand="lg" className="navbar">
          <Container>
-           <Navbar.Brand href="#home" style={{ color: "#c11c08",fontFamily:"Antonio"/"sans-serif"}}>
+           <Navbar.Brand href="#home" style={{ color: "#c11c08",fontFamily:"Antonio"}}>
              FOODJOUR
            </Navbar.Brand>
            <Navbar.Toggle aria-controls="basic-navbar-nav" />
