@@ -9,6 +9,7 @@ in this web user can register,login,like,rate etc.
 2. Register Page.
 3. Login Page.
 4. User liked food.
+5. Create a food page.
 
 ## LIBARY / FRAMEWORK / TOOLS
 
@@ -18,6 +19,7 @@ in this web user can register,login,like,rate etc.
 4. Formik
 5. yup
 6. React-router-dom
+7. Bootstrap icon
 
 ## COLOR
 

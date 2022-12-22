@@ -5,7 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 function Navbars() {
      return (
-       <Navbar expand="lg" className="navbar">
+       <Navbar expand="lg" className="navbar sticky-top" style={{width: "100vw"}}>
          <Container>
            <Navbar.Brand href="#home" style={{ color: "#c11c08",fontFamily:"Antonio"}}>
              FOODJOUR
@@ -14,9 +14,9 @@ function Navbars() {
            <Navbar.Collapse id="basic-navbar-nav">
              <Nav className="me-auto">
                <Nav.Link href="#home">Home</Nav.Link>
-               <Nav.Link href="#link">Link</Nav.Link>
+               <Nav.Link href="#link">Login</Nav.Link>
                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                 <NavDropdown.Item href="#action/3.1">others</NavDropdown.Item>
                  <NavDropdown.Item href="#action/3.2">
                    Another action
                  </NavDropdown.Item>
