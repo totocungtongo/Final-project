@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 
+
 function App() {
   const [data, setData] = useState([]);
   const getData = () => {
@@ -33,14 +34,24 @@ function App() {
             eachIngridients += `${item.ingredients[i]} `;
           }
           return (
-            <Card style={{ width: "300px",height: "400px" }} className="cards" key={index}>
+            <Card
+              style={{ width: "300px", height: "400px" }}
+              className="cards"
+              key={index}
+            >
               {/* <Card.Img variant="top" src={item.imageUrl} className="cardsImg"/> */}
-              <div className="cardsImg" style={{backgroundImage: `url(${item.imageUrl})`}}></div>
+              <div
+                className="cardsImg"
+                style={{ backgroundImage: `url(${item.imageUrl})` }}
+              ></div>
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
                 <Card.Text>{item.description}</Card.Text>
                 <Card.Text>{eachIngridients}</Card.Text>
-                <Button variant="primary">like</Button>
+                <Card.Text className="d-flex justify-content-between">
+                  <Button variant="primary">like</Button>
+                  <i class="bi bi-hand-thumbs-up-fill" style={{fontSize:"25px"}}>{item.totalLikes}</i>
+                </Card.Text>
               </Card.Body>
             </Card>
           );
