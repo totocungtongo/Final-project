@@ -4,7 +4,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useCallback} from "react";
 import Cookies from "js-cookie";
 import { CardImg } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
@@ -14,30 +14,29 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
 
   //get food data
-  const getAllfood = () => {
-    authenticated
-      ? axios
-          .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
-            headers: {
-              apiKey: `${process.env.REACT_APP_API_KEY}`,
-              Authorization: `Bearer ${Cookies.get("jwtToken")}`,
-            },
-          })
-
-          .then((response) => {
-            setAllfood(response.data.data);
-          })
-      : axios
-          .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
-            headers: {
-              apiKey: `${process.env.REACT_APP_API_KEY}`,
-            },
-          })
-
-          .then((response) => {
-            setAllfood(response.data.data);
-          });
-  };
+  const getAllfood = useCallback(() => {
+    authenticated ?
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
+        headers: {
+          apiKey: `${process.env.REACT_APP_API_KEY}`,
+          Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+        },
+      })
+      .then((response) => {
+        setAllfood(response.data.data);
+      }): 
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
+          headers: {
+            apiKey: `${process.env.REACT_APP_API_KEY}`,
+          },
+        })
+        .then((response) => {
+          setAllfood(response.data.data);
+        });
+    
+  },[authenticated]);
   //get food data end
   // toggle like
   const toggleLike = (foodId, liked) => {
@@ -56,25 +55,23 @@ function App() {
             }
           )
           .then(() => {
-            getAllfood();
+            getAllfood()
           })
       : authenticated && liked
-      ? axios
-          .post(
-            `${process.env.REACT_APP_BASE_URL}/api/v1/unlike`,
-            {
-              foodId: foodId,
+      ? axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/v1/unlike`,
+          {
+            foodId: foodId,
+          },
+          {
+            headers: {
+              apiKey: `${process.env.REACT_APP_API_KEY}`,
+              Authorization: `Bearer ${Cookies.get("jwtToken")}`,
             },
-            {
-              headers: {
-                apiKey: `${process.env.REACT_APP_API_KEY}`,
-                Authorization: `Bearer ${Cookies.get("jwtToken")}`,
-              },
-            }
-          )
-          .then(() => {
-            getAllfood();
-          })
+          }
+        ).then(()=>{
+          getAllfood()
+        })
       : alert("you must login first");
   };
   // toggle like end
@@ -82,7 +79,7 @@ function App() {
     getAllfood();
     const token = Cookies.get("jwtToken");
     token ? setAuthenticated(true) : setAuthenticated(false);
-  }, []);
+  }, [getAllfood]);
   return (
     <>
       <Navbars />
