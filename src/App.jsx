@@ -15,17 +15,28 @@ function App() {
 
   //get food data
   const getAllfood = () => {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
-        headers: {
-          apiKey: `${process.env.REACT_APP_API_KEY}`,
-          Authorization: `Bearer ${Cookies.get("jwtToken")}`,
-        },
-      })
+    authenticated
+      ? axios
+          .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
+            headers: {
+              apiKey: `${process.env.REACT_APP_API_KEY}`,
+              Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+            },
+          })
 
-      .then((response) => {
-        setAllfood(response.data.data); 
-      });
+          .then((response) => {
+            setAllfood(response.data.data);
+          })
+      : axios
+          .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
+            headers: {
+              apiKey: `${process.env.REACT_APP_API_KEY}`,
+            },
+          })
+
+          .then((response) => {
+            setAllfood(response.data.data);
+          });
   };
   //get food data end
   // toggle like
@@ -45,23 +56,25 @@ function App() {
             }
           )
           .then(() => {
-            getAllfood()
+            getAllfood();
           })
       : authenticated && liked
-      ? axios.post(
-          `${process.env.REACT_APP_BASE_URL}/api/v1/unlike`,
-          {
-            foodId: foodId,
-          },
-          {
-            headers: {
-              apiKey: `${process.env.REACT_APP_API_KEY}`,
-              Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+      ? axios
+          .post(
+            `${process.env.REACT_APP_BASE_URL}/api/v1/unlike`,
+            {
+              foodId: foodId,
             },
-          }
-        ).then(()=>{
-          getAllfood()
-        })
+            {
+              headers: {
+                apiKey: `${process.env.REACT_APP_API_KEY}`,
+                Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+              },
+            }
+          )
+          .then(() => {
+            getAllfood();
+          })
       : alert("you must login first");
   };
   // toggle like end
