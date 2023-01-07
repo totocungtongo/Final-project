@@ -1,24 +1,65 @@
 /* font*/
-@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap");
 /* fontEnd */
-
 /* navbar */
-.navbar{
+.navbar {
   background-color: #ffcf6e;
 }
-/* navbarEnd */
-/* cards */
-.cards{
-  margin: 30px 60px;
+.img_profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0px 15px;
 }
-.cardsImg{
+/* navbarEnd */
+/* App.jsx */
+/* cards */
+.cards {
+  margin: 30px 50px;
+}
+.cardsImg {
   position: relative;
   right: 13px;
-  border-radius: 7px;
+  object-fit: cover;
   width: 300px;
   height: 200px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-color: black;
 }
+.noHover {
+  pointer-events: none;
+}
+.red{
+  color: red;
+}
+
 /* cardsEnd */
+/* App.jsx end */
+/* Login.jsx */
+.form_position {
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 500px;
+}
+@media screen and (max-width: 520px) {
+  .form_position{
+    width: 300px;
+  }
+}
+/* Login.jsx  end*/
+/* spinnerloading */
+#loading {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border: 8px solid #c11c08;
+  border-top-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+}
+/* spinnerloading end */

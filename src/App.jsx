@@ -5,53 +5,112 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
-
+import Cookies from "js-cookie";
+import { CardImg } from "react-bootstrap";
+import ReactStars from "react-rating-stars-component";
 
 function App() {
-  const [data, setData] = useState([]);
-  const getData = () => {
+  const [all_foods, setAllfood] = useState([]);
+  const [authenticated, setAuthenticated] = useState(false);
+
+  //get food data
+  const getAllfood = () => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/v1/foods`, {
         headers: {
           apiKey: `${process.env.REACT_APP_API_KEY}`,
+          Authorization: `Bearer ${Cookies.get("jwtToken")}`,
         },
       })
 
-      .then(function (response) {
-        setData(response.data.data);
+      .then((response) => {
+        setAllfood(response.data.data); 
       });
   };
+  //get food data end
+  // toggle like
+  const toggleLike = (foodId, liked) => {
+    authenticated && !liked
+      ? axios
+          .post(
+            `${process.env.REACT_APP_BASE_URL}/api/v1/like`,
+            {
+              foodId: foodId,
+            },
+            {
+              headers: {
+                apiKey: `${process.env.REACT_APP_API_KEY}`,
+                Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+              },
+            }
+          )
+          .then(() => {
+            getAllfood()
+          })
+      : authenticated && liked
+      ? axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/v1/unlike`,
+          {
+            foodId: foodId,
+          },
+          {
+            headers: {
+              apiKey: `${process.env.REACT_APP_API_KEY}`,
+              Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+            },
+          }
+        ).then(()=>{
+          getAllfood()
+        })
+      : alert("you must login first");
+  };
+  // toggle like end
   useEffect(() => {
-    getData();
+    getAllfood();
+    const token = Cookies.get("jwtToken");
+    token ? setAuthenticated(true) : setAuthenticated(false);
   }, []);
   return (
     <>
       <Navbars />
-      <Row className="justify-content-center mt-3">
-        {data.map((item, index) => {
-          let eachIngridients = "";
-          for (let i in item.ingredients) {
-            eachIngridients += `${item.ingredients[i]} `;
-          }
+      <Row className="justify-content-center">
+        {all_foods.map((item, index) => {
+          let eachIngridients = item.ingredients.join(" ");
           return (
-            <Card
-              style={{ width: "300px", height: "400px" }}
-              className="cards"
-              key={index}
-            >
-              {/* <Card.Img variant="top" src={item.imageUrl} className="cardsImg"/> */}
-              <div
-                className="cardsImg"
-                style={{ backgroundImage: `url(${item.imageUrl})` }}
-              ></div>
+            <Card style={{ width: "300px" }} className="cards" key={index}>
+              <CardImg className="cardsImg" src={`${item.imageUrl}`}></CardImg>
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
-                <Card.Text>{item.description}</Card.Text>
-                <Card.Text>{eachIngridients}</Card.Text>
-                <Card.Text className="d-flex justify-content-between">
-                  <Button variant="primary">like</Button>
-                  <i class="bi bi-hand-thumbs-up-fill" style={{fontSize:"25px"}}>{item.totalLikes}</i>
+                <Card.Text>
+                  {item.description}
+                  <br />
+                  <br />
+                  {eachIngridients}
                 </Card.Text>
+                <Card.Text style={{ fontSize: "25px", justifySelf: "end" }}>
+                  <Button
+                    variant="none"
+                    className="likeButton"
+                    onClick={() => toggleLike(item.id, item.isLike)}
+                  >
+                    <i
+                      className={
+                        item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
+                      }
+                      style={{ fontSize: "25px" }}
+                    ></i>
+                  </Button>
+                  {item.totalLikes}
+                </Card.Text>
+                <ReactStars
+                  classNames="noHover"
+                  count={5}
+                  onChange={null}
+                  isHalf={true}
+                  value={item.rating}
+                  size={45}
+                  activeColor="#ffd700"
+                />
               </Card.Body>
             </Card>
           );

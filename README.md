@@ -20,6 +20,8 @@ in this web user can register,login,like,rate etc.
 5. yup
 6. React-router-dom
 7. Bootstrap icon
+8. js-cookies
+9. react-rating-stars-component
 
 ## COLOR
 
