@@ -39,7 +39,11 @@ function Login() {
         .then((res) => {
           localStorage.setItem("username", res.data.user.name);
           localStorage.setItem("profileimg", res.data.user.profilePictureUrl);
+          localStorage.setItem("user_role", res.data.user.role);
           Cookies.set("jwtToken", res.data.token, {
+            expires: 400,
+          });
+          Cookies.set("user_id", res.data.id, {
             expires: 400,
           });
           window.location.assign("/Home");
@@ -54,7 +58,6 @@ function Login() {
             alert(`${e.response.data.message}`);
           }, 500);
         });
-
     },
   });
   return (
@@ -67,7 +70,6 @@ function Login() {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              id="email"
               name="email"
               onChange={login_form.handleChange}
               onBlur={login_form.handleBlur}
@@ -82,7 +84,6 @@ function Login() {
           <Form.Group className="mb-3">
             <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control
-              id="password"
               name="password"
               type="password"
               autoComplete="off"
@@ -103,9 +104,7 @@ function Login() {
         </Form>
       ) : (
         // <Loader />
-        <Spinner animation="border" role="status" id="loading">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <Spinner animation="border" role="status" className="loading"></Spinner>
       )}
     </>
   );

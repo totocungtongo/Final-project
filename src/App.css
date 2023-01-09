@@ -1,6 +1,22 @@
 /* font test*/
-@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans:wght@500&display=swap');
 /* fontEnd */
+/* position */
+.form_position {
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 500px;
+}
+@media screen and (max-width: 520px) {
+  .form_position{
+    width: 300px;
+  }
+}
+/* position end */
 /* navbar */
 .navbar {
   background-color: #ffcf6e;
@@ -30,27 +46,10 @@
 .red{
   color: red;
 }
-
 /* cardsEnd */
 /* App.jsx end */
-/* Login.jsx */
-.form_position {
-  text-align: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 500px;
-}
-@media screen and (max-width: 520px) {
-  .form_position{
-    width: 300px;
-  }
-}
-/* Login.jsx  end*/
 /* spinnerloading */
-#loading {
+.loading {
   display: inline-block;
   width: 80px;
   height: 80px;

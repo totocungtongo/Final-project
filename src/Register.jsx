@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import Spinner from "react-bootstrap/Spinner";
-import ImageUploader from "./ImageUploader";
 
 function Register() {
   const [loading, setLoading] = useState(false);
@@ -46,76 +45,100 @@ function Register() {
     onSubmit: (values) => {
       setLoading(true);
       console.log(values);
-      axios
-        .post(
-          `${process.env.REACT_APP_BASE_URL}/api/v1/register`,
-          {
-            email: values.email,
-            name: values.name,
-            password: values.password,
-            passwordRepeat: values.passwordrepeat,
-            profilePictureUrl: Cookies.get("image_uploaded"),
-            role: values.role,
-            phoneNumber: values.phonenumber,
-          },
-          {
-            headers: {
-              apiKey: `${process.env.REACT_APP_API_KEY}`,
-            },
-          }
-        )
-        .then((res) => {
-          axios
-            .post(
-              `${process.env.REACT_APP_BASE_URL}/api/v1/login`,
-              {
-                email: values.email,
-                password: values.password,
-              },
-              {
-                headers: {
-                  apiKey: `${process.env.REACT_APP_API_KEY}`,
-                },
-              }
-            )
-            .then((res) => {
-              localStorage.setItem("username", res.data.user.name);
-              localStorage.setItem(
-                "profileimg",
-                res.data.user.profilePictureUrl
-              );
-              Cookies.set("jwtToken", res.data.token, {
-                expires: 400,
-              });
-              Cookies.remove("image_uploaded");
-              window.location.assign("/Home")
-              setTimeout(() => {
-              setLoading(false);
-              }, 500);
-            });
-        })
-        .catch((error) => {
-          setLoading(false);
-          setTimeout(() => {
-            alert(`${error.response.data.message}`);
-          }, 1);
-        });
+       Cookies.remove("image_uploaded");
+       let form_data = new FormData();
+       form_data.append("image", values.image);
+       axios
+         .post(
+           `${process.env.REACT_APP_BASE_URL}/api/v1/upload-image`,
+           form_data,
+           {
+             headers: {
+               apiKey: `${process.env.REACT_APP_API_KEY}`,
+             },
+           }
+         )
+         .then((res) => {
+           Cookies.set("image_uploaded", res.data.url);
+           axios
+             .post(
+               `${process.env.REACT_APP_BASE_URL}/api/v1/register`,
+               {
+                 email: values.email,
+                 name: values.name,
+                 password: values.password,
+                 passwordRepeat: values.passwordrepeat,
+                 profilePictureUrl: Cookies.get("image_uploaded"),
+                 role: values.role,
+                 phoneNumber: values.phonenumber,
+               },
+               {
+                 headers: {
+                   apiKey: `${process.env.REACT_APP_API_KEY}`,
+                 },
+               }
+             )
+             .then((res) => {
+               axios
+                 .post(
+                   `${process.env.REACT_APP_BASE_URL}/api/v1/login`,
+                   {
+                     email: values.email,
+                     password: values.password,
+                   },
+                   {
+                     headers: {
+                       apiKey: `${process.env.REACT_APP_API_KEY}`,
+                     },
+                   }
+                 )
+                 .then((res) => {
+                   localStorage.setItem("username", res.data.user.name);
+                   localStorage.setItem(
+                     "profileimg",
+                     res.data.user.profilePictureUrl
+                   );
+                   localStorage.setItem("user_role", res.data.user.role)
+                   Cookies.set("jwtToken", res.data.token, {
+                     expires: 400,
+                   });
+                   Cookies.set("user_id", res.data.id, {
+                     expires: 400,
+                   });
+                   Cookies.remove("image_uploaded");
+                   window.location.assign("/Home");
+                   setTimeout(() => {
+                     setLoading(false);
+                   }, 500);
+                 });
+             })
+             .catch((error) => {
+               setLoading(false);
+               setTimeout(() => {
+                 alert(`${error.response.data.message}`);
+               }, 1);
+             });
+         })
+         .catch((e) => {
+           console.log(e);
+           setLoading(false);
+           setTimeout(() => {
+             alert(`image error contact us and we are on it`);
+           }, 500);
+         });
     },
   });
   return (
     <>
       <Navbars />
-
-      {!loading ? (
+      {!loading  ? (
         <div className="form_position">
-          <ImageUploader />
           <Form onSubmit={register_form.handleSubmit}>
-            <Form.Group className="">
-              <Form.Label htmlFor="email">Email address</Form.Label>
+            <Form.Group>
+              <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                id="email"
                 name="email"
                 onChange={register_form.handleChange}
                 onBlur={register_form.handleBlur}
@@ -124,15 +147,14 @@ function Register() {
               />
               {register_form.touched.email && register_form.errors.email ? (
                 <div style={{ color: "red", marginBottom: "5px" }}>
-                  <i className="bi bi-exclamation-diamond-fill"></i>{" "}
+                  <i className="bi bi-exclamation-diamond-fill"></i>
                   {register_form.errors.email}
                 </div>
               ) : null}
-              <Form.Label htmlFor="name">Username</Form.Label>
+              <Form.Label >Username</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter username"
-                id="name"
                 name="name"
                 onChange={register_form.handleChange}
                 onBlur={register_form.handleBlur}
@@ -141,15 +163,14 @@ function Register() {
               />
               {register_form.touched.name && register_form.errors.name ? (
                 <div style={{ color: "red", marginBottom: "5px" }}>
-                  <i className="bi bi-exclamation-diamond-fill"></i>{" "}
+                  <i className="bi bi-exclamation-diamond-fill"></i>
                   {register_form.errors.name}
                 </div>
               ) : null}
             </Form.Group>
-            <Form.Group className="">
-              <Form.Label htmlFor="password">Password</Form.Label>
+            <Form.Group >
+              <Form.Label >Password</Form.Label>
               <Form.Control
-                id="password"
                 name="password"
                 type="password"
                 autoComplete="off"
@@ -166,10 +187,9 @@ function Register() {
                 {register_form.errors.password}
               </div>
             ) : null}
-            <Form.Group className="">
-              <Form.Label htmlFor="passwordrepeat">Repeat Password</Form.Label>
+            <Form.Group >
+              <Form.Label >Repeat Password</Form.Label>
               <Form.Control
-                id="passwordrepeat"
                 name="passwordrepeat"
                 type="password"
                 autoComplete="off"
@@ -183,14 +203,13 @@ function Register() {
             {register_form.touched.passwordrepeat &&
             register_form.errors.passwordrepeat ? (
               <div style={{ color: "red", marginBottom: "5px" }}>
-                <i className="bi bi-exclamation-diamond-fill"></i>{" "}
+                <i className="bi bi-exclamation-diamond-fill"></i>
                 {register_form.errors.passwordrepeat}
               </div>
             ) : null}
-            <Form.Group className="">
-              <Form.Label htmlFor="role">Choose Your role </Form.Label>
+            <Form.Group >
+              <Form.Label >Choose Your role </Form.Label>
               <Form.Select
-                id="role"
                 aria-label="Role select"
                 onChange={(e) => {
                   register_form.setFieldValue("role", e.target.value);
@@ -204,14 +223,26 @@ function Register() {
             </Form.Group>
             {register_form.touched.role && register_form.errors.role ? (
               <div style={{ color: "red", marginBottom: "5px" }}>
-                <i className="bi bi-exclamation-diamond-fill"></i>{" "}
+                <i className="bi bi-exclamation-diamond-fill"></i>
                 {register_form.errors.role}
               </div>
             ) : null}
-            <Form.Group className="">
+            <Form.Group className="mb-3 ">
+              <Form.Label >Upload your image here ! </Form.Label>
+              <Form.Control
+                name="image"
+                type="file"
+                accept="image/png, image/jpeg"
+                onChange={(event) => {
+                  register_form.setFieldValue("image", event.target.files[0]);
+                }}
+                onBlur={register_form.handleBlur}
+                required
+              />
+            </Form.Group>
+            <Form.Group>
               <Form.Label htmlFor="phonenumber">Phone number</Form.Label>
               <Form.Control
-                id="phonenumber"
                 name="phonenumber"
                 type="text"
                 autoComplete="off"
@@ -225,7 +256,7 @@ function Register() {
             {register_form.touched.phonenumber &&
             register_form.errors.phonenumber ? (
               <div style={{ color: "red", marginBottom: "5px" }}>
-                <i className="bi bi-exclamation-diamond-fill"></i>{" "}
+                <i className="bi bi-exclamation-diamond-fill"></i>
                 {register_form.errors.phonenumber}
               </div>
             ) : null}
@@ -236,7 +267,7 @@ function Register() {
         </div>
       ) : (
         // <Loader />
-        <Spinner animation="border" role="status" id="loading"></Spinner>
+        <Spinner animation="border" role="status" class="loading"></Spinner>
       )}
     </>
   );

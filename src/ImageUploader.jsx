@@ -61,6 +61,7 @@ function ImageUploader(){
                 image_form.setFieldValue("image", event.target.files[0]);
               }}
               onBlur={image_form.handleBlur}
+              required
             />
           </Form.Group>
           <Form.Group className="d-flex  justify-content-around">

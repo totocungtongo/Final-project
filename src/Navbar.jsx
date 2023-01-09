@@ -2,8 +2,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
 
@@ -13,6 +11,7 @@ function Navbars() {
   const img_profile = localStorage.getItem("profileimg");
   const logout = () => {
     Cookies.remove("jwtToken");
+    Cookies.remove("user_id");
     localStorage.clear();
     window.location.assign("/Login");
   };
@@ -31,60 +30,39 @@ function Navbars() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             {isLoggedin ? (
-              <>
-                <Nav.Link href="/" disabled style={{ color: "white" }}>
-                  <img
-                    className="img_profile"
-                    src={
-                      localStorage.getItem("profileimg") !== "null"
-                        ? img_profile
-                        : " https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280.jpg"
-                    }
-                    alt=""
-                  ></img>
-
-                  {username}
-                </Nav.Link>
-              </>
+              <NavDropdown
+                title={
+                  <>
+                    <img
+                      className="img_profile"
+                      src={
+                        localStorage.getItem("profileimg").length > 10
+                          ? img_profile
+                          : "https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280.jpg"
+                      }
+                      alt=""
+                    ></img>
+                    <span style={{fontFamily: "Open Sans", color: "white"}}>{username}</span>
+                  </>
+                }
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item href="#action/3.1">
+                  <Button variant="primary" onClick={logout}>
+                    logout
+                  </Button>
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/Update">
+                  Update Profile
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
             ) : (
               <Nav.Link href="/login">Login</Nav.Link>
             )}
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">others</NavDropdown.Item>
-              {isLoggedin ? (
-                <DropdownButton
-                  id="dropdown-basic-button"
-                  title={
-                    <>
-                      <i
-                        className="bi bi-person-circle"
-                        style={{ fontSize: "20px" }}
-                      ></i>
-                      <span>Account</span>
-                    </>
-                  }
-                  drop="end"
-                  variant="light"
-                >
-                  <Dropdown.Item href="#/action-1">
-                    <Button variant="primary" onClick={logout}>
-                      logout
-                    </Button>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    Another action
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    Something else
-                  </Dropdown.Item>
-                </DropdownButton>
-              ) : null}
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

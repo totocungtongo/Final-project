@@ -14,12 +14,13 @@ import Cookies from "js-cookie";
 import App from "./App";
 import Login from "./Login";
 import Register from "./Register";
+import Account from "./Account";
 
 const AppWrapper = () => {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = Cookies.get("jwtToken");
+    const token = Boolean(Cookies.get("jwtToken"));
     token ? setAuthenticated(true) : setAuthenticated(false);
   }, []);
   return (
@@ -34,6 +35,10 @@ const AppWrapper = () => {
         <Route
           path="/Login"
           element={authenticated ? <Navigate to={"/"} replace /> : <Login />}
+        />
+        <Route
+          path="/Update"
+          element={Cookies.get("jwtToken")? <Account /> : <Navigate to={"/"} replace />}
         />
         <Route
           path="*"
