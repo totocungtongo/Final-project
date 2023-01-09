@@ -123,7 +123,7 @@ function Register() {
            console.log(e);
            setLoading(false);
            setTimeout(() => {
-             alert(`image error contact us and we are on it`);
+             alert(`image size is too large `);
            }, 500);
          });
     },
