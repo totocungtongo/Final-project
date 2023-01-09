@@ -26,19 +26,27 @@ const AppWrapper = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/Home" element={<App />} />
+        <Route path="/" element={authenticated ? <App /> : <Login />} />
+        <Route path="/Home" element={authenticated ? <App /> : <Login />} />
         <Route
           path="/Register"
           element={authenticated ? <Navigate to={"/"} replace /> : <Register />}
         />
         <Route
           path="/Login"
-          element={authenticated ? <Navigate to={"/"} replace /> : <Login />}
+          element={
+            authenticated ? <Navigate to={"/Home"} replace /> : <Login />
+          }
         />
         <Route
           path="/Update"
-          element={Cookies.get("jwtToken")? <Account /> : <Navigate to={"/"} replace />}
+          element={
+            Cookies.get("jwtToken") ? (
+              <Account />
+            ) : (
+              <Navigate to={"/"} replace />
+            )
+          }
         />
         <Route
           path="*"

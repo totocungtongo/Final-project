@@ -10,6 +10,7 @@ in this web user can register,login,like,rate etc.
 3. Login Page.
 4. User liked food.
 5. Create a food page.
+6. Update profile page
 
 ## LIBARY / FRAMEWORK / TOOLS
 
