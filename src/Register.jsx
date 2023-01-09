@@ -267,7 +267,7 @@ function Register() {
         </div>
       ) : (
         // <Loader />
-        <Spinner animation="border" role="status" class="loading"></Spinner>
+        <Spinner animation="border" role="status" className="loading"></Spinner>
       )}
     </>
   );
