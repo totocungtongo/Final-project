@@ -134,8 +134,8 @@ function Account() {
                 value={account_form.values.name}
               />
             </Form.Group>
-            {account_form.touched.email && account_form.errors.email ? (
-              <div style={{ color: "red" }}>{account_form.errors.email}</div>
+            {account_form.touched.name && account_form.errors.name ? (
+              <div style={{ color: "red" }}>{account_form.errors.name}</div>
             ) : null}
             <br />
             <Form.Group>
