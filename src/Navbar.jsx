@@ -10,10 +10,12 @@ function Navbars() {
   const username = localStorage.getItem("username");
   const img_profile = localStorage.getItem("profileimg");
   const logout = () => {
-    Cookies.remove("jwtToken");
-    Cookies.remove("user_id");
-    localStorage.clear();
-    window.location.assign("/Login");
+    if (window.confirm("You sured to log out?")) {
+      Cookies.remove("jwtToken");
+      Cookies.remove("user_id");
+      localStorage.clear();
+      window.location.assign("/Login");
+    }
   };
   return (
     <Navbar
@@ -42,7 +44,9 @@ function Navbars() {
                       }
                       alt=""
                     ></img>
-                    <span style={{fontFamily: "Open Sans", color: "white"}}>{username}</span>
+                    <span style={{ fontFamily: "Open Sans", color: "white" }}>
+                      {username}
+                    </span>
                   </>
                 }
                 id="basic-nav-dropdown"
