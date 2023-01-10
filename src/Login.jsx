@@ -96,7 +96,7 @@ function Login() {
           {login_form.touched.password && login_form.errors.password ? (
             <div style={{ color: "red" }}>{login_form.errors.password}</div>
           ) : null}
-          <a href="/register"> Have you sign up ? Sign up here!</a>
+          <a href="/Register"> Have you sign up ? Sign up here!</a>
           <br />
           <Button variant="primary" type="submit">
             Submit

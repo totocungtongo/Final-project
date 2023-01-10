@@ -17,16 +17,22 @@ import Register from "./Register";
 import Account from "./Account";
 
 const AppWrapper = () => {
+  // disini di set true dulu karena ada bug page login ter navigasi di route walaupun kondisi authenticated true
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
+  
     const token = Boolean(Cookies.get("jwtToken"));
-    token ? setAuthenticated(true) : setAuthenticated(false);
+    if (token) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
   }, []);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={authenticated ? <App /> : <Login />} />
+        <Route path="/" element={<Navigate to={"/Home"} replace /> } />
         <Route path="/Home" element={authenticated ? <App /> : <Login />} />
         <Route
           path="/Register"
