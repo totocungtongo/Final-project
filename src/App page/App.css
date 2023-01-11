@@ -1,5 +1,5 @@
 /* font test*/
-@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Open+Sans:wght@500&display=swap");
 /* fontEnd */
 /* position */
 .form_position {
@@ -12,7 +12,7 @@
   width: 500px;
 }
 @media screen and (max-width: 520px) {
-  .form_position{
+  .form_position {
     width: 300px;
   }
 }
@@ -28,7 +28,6 @@
   margin: 0px 15px;
 }
 /* navbarEnd */
-/* App.jsx */
 /* cards */
 .cards {
   margin: 30px 50px;
@@ -43,11 +42,16 @@
 .noHover {
   pointer-events: none;
 }
-.red{
+.red {
   color: red;
 }
 /* cardsEnd */
-/* App.jsx end */
+/* dropdown  */
+#dropdown-basic::after {
+  border: none !important;
+}
+/* dropdown end */
+
 /* spinnerloading */
 .loading {
   display: inline-block;

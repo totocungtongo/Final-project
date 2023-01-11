@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Navbars from "./Navbar";
+import Navbars from "../Navbar/Navbar";
 import * as Yup from "yup";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -43,7 +43,10 @@ function Login() {
           Cookies.set("jwtToken", res.data.token, {
             expires: 400,
           });
-          Cookies.set("user_id", res.data.id, {
+          Cookies.set("user_id", res.data.user.id, {
+            expires: 400,
+          });
+          Cookies.set("user_role", res.data.user.role, {
             expires: 400,
           });
           window.location.assign("/Home");

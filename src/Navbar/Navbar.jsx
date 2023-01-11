@@ -7,12 +7,15 @@ import Cookies from "js-cookie";
 
 function Navbars() {
   const isLoggedin = Boolean(Cookies.get("jwtToken"));
+  const isAdmin = Boolean(Cookies.get("user_role") === "admin");
+
   const username = localStorage.getItem("username");
   const img_profile = localStorage.getItem("profileimg");
   const logout = () => {
     if (window.confirm("You sured to log out?")) {
       Cookies.remove("jwtToken");
       Cookies.remove("user_id");
+      Cookies.remove("user_role");
       localStorage.clear();
       window.location.assign("/Login");
     }
@@ -56,12 +59,21 @@ function Navbars() {
                     logout
                   </Button>
                 </NavDropdown.Item>
+                <NavDropdown.Divider />
                 <NavDropdown.Item href="/Update">
                   Update Profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+                {isAdmin ? (
+                  <>
+                    <NavDropdown.Item href="/Upload Food">
+                      Upload your own food!
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                  </>
+                ) : null}
+                <NavDropdown.Item href="/Liked Food">
+                  Liked food
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (

@@ -11,17 +11,18 @@ import {
   Navigate,
 } from "react-router-dom";
 import Cookies from "js-cookie";
-import App from "./App";
-import Login from "./Login";
-import Register from "./Register";
-import Account from "./Account";
-
+import App from "./App page/App";
+import Login from "./Login page/Login";
+import Register from "./Register page/Register";
+import Account from "./Profile page/Account";
+import Creatfood from "./CreateFood page/Createfood";
+import Likefood from "./LikedFood page/Likedfood";
 const AppWrapper = () => {
   // disini di set true dulu karena ada bug page login ter navigasi di route walaupun kondisi authenticated true
   const [authenticated, setAuthenticated] = useState(false);
+  const isAdmin = Boolean(Cookies.get("user_role") === "admin");
 
   useEffect(() => {
-  
     const token = Boolean(Cookies.get("jwtToken"));
     if (token) {
       setAuthenticated(true);
@@ -32,7 +33,7 @@ const AppWrapper = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to={"/Home"} replace /> } />
+        <Route path="/" element={<Navigate to={"/Home"} replace />} />
         <Route path="/Home" element={authenticated ? <App /> : <Login />} />
         <Route
           path="/Register"
@@ -49,6 +50,20 @@ const AppWrapper = () => {
           element={
             Cookies.get("jwtToken") ? (
               <Account />
+            ) : (
+              <Navigate to={"/"} replace />
+            )
+          }
+        />
+        <Route
+          path="/Upload Food"
+          element={isAdmin ? <Creatfood /> : <Navigate to={"/"} replace />}
+        />
+        <Route
+          path="/Liked Food"
+          element={
+            Cookies.get("jwtToken") ? (
+              <Likefood />
             ) : (
               <Navigate to={"/"} replace />
             )

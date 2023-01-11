@@ -6,7 +6,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Spinner } from "react-bootstrap";
-import Navbars from "./Navbar";
+import Navbars from "../Navbar/Navbar";
 
 function Account() {
   const [loading, setLoading] = useState(false);
@@ -35,70 +35,67 @@ function Account() {
       Cookies.remove("image_uploaded");
       let form_data = new FormData();
       form_data.append("image", values.image);
-       axios
-         .post(
-           `${process.env.REACT_APP_BASE_URL}/api/v1/upload-image`,
-           form_data,
-           {
-             headers: {
-               apiKey: `${process.env.REACT_APP_API_KEY}`,
-             },
-           }
-         )
-         .then((res) => {
-           Cookies.set("image_uploaded", res.data.url);
-           axios
-             .post(
-               `${process.env.REACT_APP_BASE_URL}/api/v1/update-profile`,
-               {
-                 name: values.name,
-                 email: values.email,
-                 profilePictureUrl: Cookies.get("image_uploaded"),
-                 phoneNumber: values.phonenumber,
-               },
-               {
-                 headers: {
-                   apiKey: `${process.env.REACT_APP_API_KEY}`,
-                   Authorization: `Bearer ${Cookies.get("jwtToken")}`,
-                 },
-               }
-             )
-             .then(() => {
-               localStorage.clear();
-               localStorage.setItem("username", values.name);
-               localStorage.setItem(
-                 "profileimg",
-                 Cookies.get("image_uploaded")
-               );
-               axios.post(
-                 `${
-                   process.env.REACT_APP_API_KEY
-                 }/api/v1/update-user-role/${Cookies.get("user_id")}`,
-                 { role: values.role },
-                 {
-                   headers: {
-                     apiKey: `${process.env.REACT_APP_API_KEY}`,
-                     Authorization: `Bearer ${Cookies.get("jwtToken")}`,
-                   },
-                 }
-               );
-               Cookies.remove("image_uploaded");
-               window.location.assign("/Home");
-               setTimeout(() => {
-                 setLoading(false);
-               }, 300);
-             })
-             .catch((e) => {
-               console.log(e);
-             });
-         })
-         .catch((e) => {
-           console.log(e);
-           setLoading(false);
-           setTimeout(() => {
-             alert(`image size is too large`);
-           }, 500);
-         });
+      axios
+        .post(
+          `${process.env.REACT_APP_BASE_URL}/api/v1/upload-image`,
+          form_data,
+          {
+            headers: {
+              apiKey: `${process.env.REACT_APP_API_KEY}`,
+            },
+          }
+        )
+        .then((res) => {
+          Cookies.set("image_uploaded", res.data.url);
+          axios
+            .post(
+              `${process.env.REACT_APP_BASE_URL}/api/v1/update-profile`,
+              {
+                name: values.name,
+                email: values.email,
+                profilePictureUrl: Cookies.get("image_uploaded"),
+                phoneNumber: values.phonenumber,
+              },
+              {
+                headers: {
+                  apiKey: `${process.env.REACT_APP_API_KEY}`,
+                  Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+                },
+              }
+            )
+            .then(() => {
+              localStorage.clear();
+              localStorage.setItem("username", values.name);
+              localStorage.setItem("profileimg", Cookies.get("image_uploaded"));
+              axios.post(
+                `${
+                  process.env.REACT_APP_API_KEY
+                }/api/v1/update-user-role/${Cookies.get("user_id")}`,
+                { role: values.role },
+                {
+                  headers: {
+                    apiKey: `${process.env.REACT_APP_API_KEY}`,
+                    Authorization: `Bearer ${Cookies.get("jwtToken")}`,
+                  },
+                }
+              );
+              Cookies.remove("image_uploaded");
+              window.location.assign("/Home");
+              setTimeout(() => {
+                setLoading(false);
+              }, 300);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+          setTimeout(() => {
+            alert(`image size is too large`);
+          }, 500);
+        });
     },
   });
   return (
