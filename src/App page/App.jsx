@@ -1,9 +1,9 @@
 import "./App.css";
+import "./card.css";
 import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { CardImg } from "react-bootstrap";
@@ -248,103 +248,100 @@ function App() {
   return (
     <>
       <Navbars />
-      <Row className="justify-content-center">
+      <div className="container py-2">
         {all_foods.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
           return (
             <>
-              <Card style={{ width: "300px" }} className="cards" key={index}>
+              <Card className="cards postcard light red" key={index}>
                 <CardImg
-                  className="cardsImg"
+                  className="postcard__img"
                   src={`${item.imageUrl}`}
                 ></CardImg>
-                <Card.Body>
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text>
+                <Card.Body className="postcard__text t-dark">
+                  <Card.Title className="postcard__title red">
+                    {item.name}
+                  </Card.Title>
+                  <div className="postcard__bar"></div>
+                  <Card.Text className="postcard__preview-txt">
                     {item.description}
-                    <br />
-                    <br />
                     {eachIngridients}
                   </Card.Text>
-                  <div
-                    style={{ fontSize: "25px", justifySelf: "end" }}
-                    className="d-flex justify-content-around"
-                  >
-                    <Button
-                      variant="none"
-                      className="likeButton"
-                      onClick={() => toggleLike(item.id, item.isLike)}
-                    >
-                      <i
-                        className={
-                          item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
-                        }
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                      <span className="pt-1" style={{ fontSize: "26px" }}>
-                        {item.totalLikes}
-                      </span>
-                    </Button>
-
-                    <Button
-                      variant="none"
-                      style={{
-                        width: "51px",
-                        height: "51.5px",
-                        padding: "6px 12px",
-                        border: "none",
-                      }}
-                      className="d-flex justify-content-center"
-                    >
-                      <i
-                        className="bi bi-star-fill align-self-center"
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                      <span style={{ fontSize: "26px", paddingTop: "2px" }}>
-                        {item.rating % 1 === 0
-                          ? item.rating
-                          : item.rating.toFixed(1)}
-                      </span>
-                    </Button>
-                    <Button
-                      variant="none"
-                      className="Review_Button"
-                      onClick={() => getComment(item.id)}
-                    >
-                      <i
-                        className={"bi bi-chat-right"}
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                    </Button>
+                  <ul className="postcard__tagbox">
+                    <li className="tag__item">
+                      <Button
+                        variant="none"
+                        className="likeButton"
+                        onClick={() => toggleLike(item.id, item.isLike)}
+                      >
+                        <i
+                          className={
+                            item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
+                          }
+                          style={{ fontSize: "25px" }}
+                        ></i>
+                        <span className="pt-1">{item.totalLikes}</span>
+                      </Button>
+                    </li>
+                    <li className="tag__item">
+                      <Button
+                        variant="none"
+                        className="d-flex justify-content-center"
+                      >
+                        <i
+                          className="bi bi-star-fill align-self-center"
+                          style={{ fontSize: "25px" }}
+                        ></i>
+                        <span>
+                          {item.rating % 1 === 0
+                            ? item.rating
+                            : item.rating.toFixed(1)}
+                        </span>
+                      </Button>
+                    </li>
+                    <li className="tag__item">
+                      <Button
+                        variant="none"
+                        className="Review_Button"
+                        onClick={() => getComment(item.id)}
+                      >
+                        <i
+                          className={"bi bi-chat-right"}
+                          style={{ fontSize: "25px" }}
+                        ></i>
+                      </Button>
+                    </li>
                     {isAdmin ? (
-                      <Dropdown>
-                        <Dropdown.Toggle variant="none" id="dropdown-basic">
-                          <i
-                            className="bi bi-three-dots-vertical"
-                            style={{ fontSize: "25px" }}
-                          ></i>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item>
-                            <Button onClick={() => getFoodbyid(item.id)}>
-                              Update
-                            </Button>
-                          </Dropdown.Item>
-                          <Dropdown.Item>
-                            <Button onClick={() => toggleDelete(item.id)}>
-                              Delete
-                            </Button>
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                      <li className="tag__item">
+                        <Dropdown>
+                          <Dropdown.Toggle variant="none" id="dropdown-basic">
+                            <i
+                              className="bi bi-three-dots-vertical"
+                              style={{ fontSize: "25px" }}
+                            ></i>
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu>
+                            <Dropdown.Item>
+                              <Button onClick={() => getFoodbyid(item.id)}>
+                                Update
+                              </Button>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                              <Button onClick={() => toggleDelete(item.id)}>
+                                Delete
+                              </Button>
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </li>
                     ) : null}
-                  </div>
+                  </ul>
                 </Card.Body>
               </Card>
             </>
           );
         })}
-      </Row>
+      </div>
       {/* MOADAL REVIEW */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
