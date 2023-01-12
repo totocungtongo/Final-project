@@ -6,7 +6,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Spinner } from "react-bootstrap";
-import Navbars from "../Navbar/Navbar";
+import Navbars from "../Component/Navbar";
 
 function Account() {
   const [loading, setLoading] = useState(false);

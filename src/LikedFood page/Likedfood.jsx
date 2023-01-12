@@ -1,4 +1,4 @@
-import Navbars from "../Navbar/Navbar";
+import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";

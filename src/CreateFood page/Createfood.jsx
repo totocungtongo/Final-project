@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Navbars from "../Navbar/Navbar";
+import Navbars from "../Component/Navbar";
 import * as Yup from "yup";
 import axios from "axios";
 import { useFormik } from "formik";
