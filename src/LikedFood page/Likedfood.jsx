@@ -3,7 +3,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { CardImg } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
@@ -126,8 +126,8 @@ function Likefood() {
         {liked_food.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
           return (
-            <>
-              <Card style={{ width: "300px" }} className="cards" key={index}>
+            <Fragment   key={index}>
+              <Card style={{ width: "300px" }} className="cards" >
                 <CardImg
                   className="cardsImg"
                   src={`${item.imageUrl}`}
@@ -193,7 +193,7 @@ function Likefood() {
                   </Card.Text>
                 </Card.Body>
               </Card>
-            </>
+            </Fragment>
           );
         })}
       </Row>

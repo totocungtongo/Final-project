@@ -4,7 +4,7 @@ import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { CardImg } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
@@ -252,8 +252,8 @@ function App() {
         {all_foods.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
           return (
-            <>
-              <Card className="cards postcard light red" key={index}>
+            <Fragment key={index}>
+              <Card className="cards postcard light red" >
                 <CardImg
                   className="postcard__img"
                   src={`${item.imageUrl}`}
@@ -338,7 +338,7 @@ function App() {
                   </ul>
                 </Card.Body>
               </Card>
-            </>
+            </Fragment>
           );
         })}
       </div>
