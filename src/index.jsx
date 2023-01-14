@@ -19,36 +19,61 @@ import Creatfood from "./CreateFood page/Createfood";
 import Likefood from "./LikedFood page/Likedfood";
 const AppWrapper = () => {
   // disini di set true dulu karena ada bug page login ter navigasi di route walaupun kondisi authenticated true
-  const [authenticated, setAuthenticated] = useState(false);
-  const isAdmin = Boolean(Cookies.get("user_role") === "admin");
+  const [authenticated, setAuthenticated] = useState(undefined);
+  const [isAdmin, setIsadmin] = useState(undefined);
 
   useEffect(() => {
     const token = Boolean(Cookies.get("jwtToken"));
+    const isAdmin = Boolean(Cookies.get("user_role") === "admin");
     if (token) {
       setAuthenticated(true);
     } else {
       setAuthenticated(false);
+    }
+    if (isAdmin){
+      setIsadmin(true)
+    }else{
+   setIsadmin(false);
     }
   }, []);
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to={"/Home"} replace />} />
-        <Route path="/Home" element={authenticated ? <App /> : <Login />} />
+        <Route
+          path="/Home"
+          element={
+            authenticated === undefined ? null : authenticated ? (
+              <App />
+            ) : (
+              <Login />
+            )
+          }
+        />
         <Route
           path="/Register"
-          element={authenticated ? <Navigate to={"/"} replace /> : <Register />}
+          element={
+            authenticated === undefined ? null : authenticated ? (
+              <Navigate to={"/"} replace />
+            ) : (
+              <Register />
+            )
+          }
         />
         <Route
           path="/Login"
           element={
-            authenticated ? <Navigate to={"/Home"} replace /> : <Login />
+            authenticated === undefined ? null : authenticated ? (
+              <Navigate to={"/"} replace />
+            ) : (
+              <Login />
+            )
           }
         />
         <Route
           path="/Update"
           element={
-            Cookies.get("jwtToken") ? (
+            authenticated === undefined ? null : authenticated ? (
               <Account />
             ) : (
               <Navigate to={"/"} replace />
@@ -57,12 +82,18 @@ const AppWrapper = () => {
         />
         <Route
           path="/Upload Food"
-          element={isAdmin ? <Creatfood /> : <Navigate to={"/"} replace />}
+          element={
+            isAdmin === undefined ? null : isAdmin ? (
+              <Creatfood />
+            ) : (
+              <Navigate to={"/"} replace />
+            )
+          }
         />
         <Route
           path="/Liked Food"
           element={
-            Cookies.get("jwtToken") ? (
+            authenticated === undefined ? null : authenticated ? (
               <Likefood />
             ) : (
               <Navigate to={"/"} replace />
