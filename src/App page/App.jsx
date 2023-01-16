@@ -248,12 +248,12 @@ function App() {
   return (
     <>
       <Navbars />
-      <div className="container py-2">
+      <div className="container my-3">
         {all_foods.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
           return (
             <Fragment key={index}>
-              <Card className="cards postcard light red" >
+              <Card className="cards postcard light red">
                 <CardImg
                   className="postcard__img"
                   src={`${item.imageUrl}`}
@@ -265,7 +265,8 @@ function App() {
                   <div className="postcard__bar"></div>
                   <Card.Text className="postcard__preview-txt">
                     {item.description}
-                    {eachIngridients}
+                    <br />
+                    Ingridients : {eachIngridients}
                   </Card.Text>
                   <ul className="postcard__tagbox">
                     <li className="tag__item">

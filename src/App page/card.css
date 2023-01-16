@@ -23,14 +23,8 @@
 	 position: relative;
 	 color: #fff;
 }
- .postcard.dark {
-	 background-color: #18151f;
-}
  .postcard.light {
 	 background-color: #e1e5ea;
-}
- .postcard .t-dark {
-	 color: #18151f;
 }
  .postcard a {
 	 color: inherit;

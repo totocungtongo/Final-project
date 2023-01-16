@@ -1,8 +1,8 @@
+import "../App page/card.css";
 import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
 import { Fragment, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { CardImg } from "react-bootstrap";
@@ -13,8 +13,8 @@ import ReactStars from "react-rating-stars-component";
 
 function Likefood() {
   const [liked_food, setLikedfood] = useState([]);
-  const [food_rating, setFood_rating] = useState([]);
-  const [review_foodId, setReviewfoodId] = useState("");
+  const [food_rating, setFoodrating] = useState([]);
+  const [comment_foodId, setCommentfoodId] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -70,22 +70,19 @@ function Likefood() {
   };
   // toggleLike end
   // toggle comment
-  const toggleComment = (foodId) => {
-    handleShow();
-    getComment(foodId);
-  };
-  const getComment = (foodId) => {
-    setReviewfoodId(foodId);
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/v1/food-rating/${foodId}`, {
-        headers: {
-          apiKey: `${process.env.REACT_APP_API_KEY}`,
-        },
-      })
-      .then((res) => {
-        setFood_rating(res.data.data);
-      });
-  };
+   const getComment = (foodId) => {
+     handleShow();
+     setCommentfoodId(foodId);
+     axios
+       .get(`${process.env.REACT_APP_BASE_URL}/api/v1/food-rating/${foodId}`, {
+         headers: {
+           apiKey: `${process.env.REACT_APP_API_KEY}`,
+         },
+       })
+       .then((res) => {
+         setFoodrating(res.data.data);
+       });
+   };
   // toggle comment end
   // Review form
   const review_form = useFormik({
@@ -98,7 +95,7 @@ function Likefood() {
       console.log(values.rating);
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/api/v1/rate-food/${review_foodId}`,
+          `${process.env.REACT_APP_BASE_URL}/api/v1/rate-food/${comment_foodId}`,
           {
             rating: values.rating,
             review: values.review,
@@ -111,7 +108,7 @@ function Likefood() {
           }
         )
         .then(() => {
-          getComment(review_foodId);
+          getComment(comment_foodId);
           getLikefood();
         });
     },
@@ -122,81 +119,77 @@ function Likefood() {
   return (
     <>
       <Navbars />
-      <Row className="justify-content-center">
+     <div className="container py-2">
         {liked_food.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
           return (
-            <Fragment   key={index}>
-              <Card style={{ width: "300px" }} className="cards" >
+            <Fragment key={index}>
+              <Card className="cards postcard light red">
                 <CardImg
-                  className="cardsImg"
+                  className="postcard__img"
                   src={`${item.imageUrl}`}
                 ></CardImg>
-                <Card.Body>
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text>
+                <Card.Body className="postcard__text t-dark">
+                  <Card.Title className="postcard__title red">
+                    {item.name}
+                  </Card.Title>
+                  <div className="postcard__bar"></div>
+                  <Card.Text className="postcard__preview-txt">
                     {item.description}
                     <br />
-                    <br />
-                    {eachIngridients}
+                    Ingridients : {eachIngridients}
                   </Card.Text>
-                  <Card.Text
-                    style={{ fontSize: "25px", justifySelf: "end" }}
-                    className="d-flex justify-content-around"
-                  >
-                    <Button
-                      variant="none"
-                      className="likeButton"
-                      onClick={() => toggleLike(item.id, item.isLike)}
-                    >
-                      <i
-                        className={
-                          item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
-                        }
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                      <span className="pt-1" style={{ fontSize: "26px" }}>
-                        {item.totalLikes}
-                      </span>
-                    </Button>
-
-                    <Button
-                      variant="none"
-                      style={{
-                        width: "51px",
-                        height: "51.5px",
-                        padding: "6px 12px",
-                        border: "none",
-                      }}
-                      className="d-flex justify-content-center"
-                    >
-                      <i
-                        className="bi bi-star-fill align-self-center"
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                      <span style={{ fontSize: "26px", paddingTop: "2px" }}>
-                        {item.rating % 1 === 0
-                          ? item.rating
-                          : item.rating.toFixed(1)}
-                      </span>
-                    </Button>
-                    <Button
-                      variant="none"
-                      className="Review_Button"
-                      onClick={() => toggleComment(item.id)}
-                    >
-                      <i
-                        className={"bi bi-chat-right"}
-                        style={{ fontSize: "25px" }}
-                      ></i>
-                    </Button>
-                  </Card.Text>
+                  <ul className="postcard__tagbox">
+                    <li className="tag__item">
+                      <Button
+                        variant="none"
+                        className="likeButton"
+                        onClick={() => toggleLike(item.id, item.isLike)}
+                      >
+                        <i
+                          className={
+                            item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
+                          }
+                          style={{ fontSize: "25px" }}
+                        ></i>
+                        <span className="pt-1">{item.totalLikes}</span>
+                      </Button>
+                    </li>
+                    <li className="tag__item">
+                      <Button
+                        variant="none"
+                        className="d-flex justify-content-center"
+                      >
+                        <i
+                          className="bi bi-star-fill align-self-center"
+                          style={{ fontSize: "25px" }}
+                        ></i>
+                        <span>
+                          {item.rating % 1 === 0
+                            ? item.rating
+                            : item.rating.toFixed(1)}
+                        </span>
+                      </Button>
+                    </li>
+                    <li className="tag__item">
+                      <Button
+                        variant="none"
+                        className="Review_Button"
+                        onClick={() => getComment(item.id)}
+                      >
+                        <i
+                          className={"bi bi-chat-right"}
+                          style={{ fontSize: "25px" }}
+                        ></i>
+                      </Button>
+                    </li>
+                  </ul>
                 </Card.Body>
               </Card>
             </Fragment>
           );
         })}
-      </Row>
+      </div>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Reviews</Modal.Title>
