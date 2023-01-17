@@ -105,7 +105,7 @@ function Creatfood() {
               onChange={create_form.handleChange}
               onBlur={create_form.handleBlur}
               value={create_form.values.name}
-              maxLength={15}
+              maxLength={30}
             />
           </Form.Group>
           {create_form.touched.name && create_form.errors.name ? (

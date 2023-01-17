@@ -261,8 +261,10 @@ function Register() {
               {register_form.errors.phonenumber}
             </div>
           ) : null}
+          <a href="/Login"> Do you already have account ? Click here to sign up!</a>
+          <br />
           <Button variant="primary" type="submit">
-            Submit
+            Register!
           </Button>
         </Form>
       ) : (

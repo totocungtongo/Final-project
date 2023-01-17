@@ -6,6 +6,7 @@
  a, a:hover {
 	 text-decoration: none;
 }
+
  #pageHeaderTitle {
 	 margin: 2rem 0;
 	 text-transform: uppercase;
@@ -39,6 +40,7 @@
 }
  .postcard .postcard__title {
 	 font-size: 1.75rem;
+	 color: #18151f;
 }
  .postcard .postcard__img {
 	 max-height: 180px;
@@ -68,6 +70,7 @@
 	 text-overflow: ellipsis;
 	 text-align: justify;
 	 height: 100%;
+	 color: #18151f;
 }
  .postcard .postcard__tagbox {
 	 display: flex;
@@ -85,15 +88,13 @@
 	 margin: 0 5px 5px 0;
 	 cursor: default;
 	 user-select: none;
-	 transition: background-color 0.3s;
+	 /* transition: background-color 0.3s; */
 }
 .tag_item_button{
-	cursor:pointer;
-  outline:none;
   border:none;
 }
  .postcard .postcard__tagbox .tag__item:hover {
-	 background: rgba(83, 83, 83, 0.8);
+	 color: gray;
 }
  .postcard:before {
 	 content: "";
@@ -180,6 +181,7 @@
 }
  .red .postcard__title:hover {
 	 color: #bd150b;
+	 transition: ease 0.5s;
 }
  .red .postcard__bar {
 	 background-color: #bd150b;

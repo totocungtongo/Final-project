@@ -6,7 +6,10 @@ max-height: 60px;
 .navbar_text{
     padding-top: 15px;
 }
-
+.nav_logo{
+    width: 100px;
+    height: 100px;
+}
 .nav_link_icon {
 display: flex;
 align-items: center;
@@ -31,6 +34,10 @@ padding-top: 11px;
 display: flex;
 align-items: center;
 max-height: none;
+}
+.nav_logo{
+    width: 80px;
+    height: 80px;
 }
 
 }

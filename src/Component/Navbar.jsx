@@ -28,11 +28,11 @@ function Navbars() {
       style={{ width: "100vw" }}
     >
       <Container className="navbar_container">
-        <Navbar.Brand style={{ color: "#c11c08", fontFamily: "Antonio" }} href="/Home">
+        <Navbar.Brand  href="/Home">
           <img
             src="https://i.postimg.cc/qMf0DW1z/Food-journal.png"
             alt="Logo"
-            style={{ width: "100px", height: "100px" }}
+            className="nav_logo"
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -83,7 +83,7 @@ function Navbars() {
                 </NavDropdown>
               </>
             ) : (
-              <Nav.Link href="/login">Login</Nav.Link>
+              null
             )}
           </Nav>
         </Navbar.Collapse>

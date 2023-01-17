@@ -102,7 +102,7 @@ function Login() {
           <a href="/Register"> Have you sign up ? Sign up here!</a>
           <br />
           <Button variant="primary" type="submit">
-            Submit
+            Sign in!
           </Button>
         </Form>
       ) : (

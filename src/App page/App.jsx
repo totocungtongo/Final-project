@@ -277,14 +277,15 @@ function App() {
                       >
                         <i
                           className={
-                            item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
+                            item.isLike ? "bi bi-heart-fill reds" : "bi bi-heart"
                           }
                           style={{
                             fontSize: "25px",
                             webkitTextStroke: "0.5px",
                           }}
-                        ></i>
-                        <span className="pt-1">{item.totalLikes}</span>
+                        >
+                          {item.totalLikes}
+                        </i>
                       </Button>
                     </li>
                     <li className="tag__item">
@@ -292,12 +293,11 @@ function App() {
                         <i
                           className="bi bi-star-fill align-self-center"
                           style={{ fontSize: "25px" }}
-                        ></i>
-                        <span>
+                        >
                           {item.rating % 1 === 0
                             ? item.rating
                             : item.rating.toFixed(1)}
-                        </span>
+                        </i>
                       </Button>
                     </li>
                     <li className="tag__item">
