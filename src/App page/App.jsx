@@ -272,23 +272,23 @@ function App() {
                     <li className="tag__item">
                       <Button
                         variant="none"
-                        className="likeButton"
+                        className="tag_item_button"
                         onClick={() => toggleLike(item.id, item.isLike)}
                       >
                         <i
                           className={
                             item.isLike ? "bi bi-heart-fill red" : "bi bi-heart"
                           }
-                          style={{ fontSize: "25px" }}
+                          style={{
+                            fontSize: "25px",
+                            webkitTextStroke: "0.5px",
+                          }}
                         ></i>
                         <span className="pt-1">{item.totalLikes}</span>
                       </Button>
                     </li>
                     <li className="tag__item">
-                      <Button
-                        variant="none"
-                        className="d-flex justify-content-center"
-                      >
+                      <Button variant="none" className="tag_item_button">
                         <i
                           className="bi bi-star-fill align-self-center"
                           style={{ fontSize: "25px" }}
@@ -303,7 +303,7 @@ function App() {
                     <li className="tag__item">
                       <Button
                         variant="none"
-                        className="Review_Button"
+                        className="tag_item_button "
                         onClick={() => getComment(item.id)}
                       >
                         <i
@@ -314,7 +314,7 @@ function App() {
                     </li>
                     {isAdmin ? (
                       <li className="tag__item">
-                        <Dropdown>
+                        <Dropdown className="tag_item_button">
                           <Dropdown.Toggle variant="none" id="dropdown-basic">
                             <i
                               className="bi bi-three-dots-vertical"

@@ -111,7 +111,7 @@ function Register() {
                   window.location.assign("/Home");
                   setTimeout(() => {
                     setLoading(false);
-                  }, 500);
+                  }, 1000);
                 });
             })
             .catch((error) => {

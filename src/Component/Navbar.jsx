@@ -28,8 +28,12 @@ function Navbars() {
       style={{ width: "100vw" }}
     >
       <Container className="navbar_container">
-        <Navbar.Brand style={{ color: "#c11c08", fontFamily: "Antonio" }}>
-          FOODGRAM
+        <Navbar.Brand style={{ color: "#c11c08", fontFamily: "Antonio" }} href="/Home">
+          <img
+            src="https://i.postimg.cc/qMf0DW1z/Food-journal.png"
+            alt="Logo"
+            style={{ width: "100px", height: "100px" }}
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -37,6 +41,11 @@ function Navbars() {
             <Nav.Link href="/" className="navbar_text">
               Home
             </Nav.Link>
+            {isAdmin ? (
+              <Nav.Link href="/Upload Food" className="nav_link_icon">
+                <i className="bi bi-upload"></i>
+              </Nav.Link>
+            ) : null}
             {isLoggedin ? (
               <>
                 <Nav.Link href="/Liked Food" className="nav_link_icon">
@@ -44,7 +53,7 @@ function Navbars() {
                 </Nav.Link>
                 <NavDropdown
                   title={
-                    <Fragment >
+                    <Fragment>
                       <img
                         className="img_profile"
                         src={
@@ -71,14 +80,6 @@ function Navbars() {
                     Update Profile
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  {isAdmin ? (
-                    <>
-                      <NavDropdown.Item href="/Upload Food">
-                        Upload your own food!
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                    </>
-                  ) : null}
                 </NavDropdown>
               </>
             ) : (

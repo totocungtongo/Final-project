@@ -12,6 +12,7 @@ display: flex;
 align-items: center;
 font-size: 25px;
 padding-top: 11px;
+-webkit-text-stroke: 1px;
 }
 
 .img_profile {
@@ -21,7 +22,7 @@ padding-top: 11px;
   margin-right: 12px;
 }
 #basic-nav-dropdown{
-    margin: none !important;
+    align-self: flex-end;
     padding-top: 14px;
 
 }
