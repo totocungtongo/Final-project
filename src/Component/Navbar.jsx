@@ -28,9 +28,9 @@ function Navbars() {
       style={{ width: "100vw" }}
     >
       <Container className="navbar_container">
-        <Navbar.Brand  href="/Home">
+        <Navbar.Brand href="/Home">
           <img
-            src="https://i.postimg.cc/qMf0DW1z/Food-journal.png"
+            src="https://i.postimg.cc/50zzHVzd/Food-journal-1.png"
             alt="Logo"
             className="nav_logo"
           />
@@ -38,8 +38,8 @@ function Navbars() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/" className="navbar_text">
-              Home
+            <Nav.Link href="/" className="nav_link_icon">
+              <i class="bi bi-house"></i>
             </Nav.Link>
             {isAdmin ? (
               <Nav.Link href="/Upload Food" className="nav_link_icon">
@@ -82,9 +82,7 @@ function Navbars() {
                   <NavDropdown.Divider />
                 </NavDropdown>
               </>
-            ) : (
-              null
-            )}
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Container>
