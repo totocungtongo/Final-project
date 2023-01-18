@@ -82,7 +82,7 @@ function Navbars() {
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/User details">User</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/All user">All User</NavDropdown.Item>
+                  {isAdmin?  <NavDropdown.Item href="/All user">All User</NavDropdown.Item>: null}
                 </NavDropdown>
               </>
             ) : null}
