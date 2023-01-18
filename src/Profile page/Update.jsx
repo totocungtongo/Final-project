@@ -80,7 +80,7 @@ function Account() {
                 }
               );
               Cookies.remove("image_uploaded");
-              window.location.assign("/Home");
+              window.location.assign("/User details");
               setTimeout(() => {
                 setLoading(false);
               }, 300);
@@ -187,9 +187,16 @@ function Account() {
               </div>
             ) : null}
             <br />
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <div className="d-flex justify-content-center " style={{gap: "10px"}}>
+              <Button variant="danger">
+                <a href="/User details" style={{ color: "white" }}>
+                  Cancel
+                </a>
+              </Button>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </div>
       ) : (

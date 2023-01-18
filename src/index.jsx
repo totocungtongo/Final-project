@@ -14,9 +14,10 @@ import Cookies from "js-cookie";
 import App from "./Home page/App";
 import Login from "./Login page/Login";
 import Register from "./Register page/Register";
-import Account from "./Profile page/Account";
+import Account from "./Profile page/Update";
 import Creatfood from "./CreateFood page/Createfood";
 import Likefood from "./LikedFood page/Likedfood";
+import Userdetails from "./Component/Userdetails";
 const AppWrapper = () => {
   // disini di set true dulu karena ada bug page login ter navigasi di route walaupun kondisi authenticated true
   const [authenticated, setAuthenticated] = useState(undefined);
@@ -95,6 +96,16 @@ const AppWrapper = () => {
           element={
             authenticated === undefined ? null : authenticated ? (
               <Likefood />
+            ) : (
+              <Navigate to={"/"} replace />
+            )
+          }
+        />
+        <Route
+          path="/User details"
+          element={
+            authenticated === undefined ? null : authenticated ? (
+              <Userdetails />
             ) : (
               <Navigate to={"/"} replace />
             )

@@ -39,7 +39,7 @@ function Navbars() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/" className="nav_link_icon">
-              <i class="bi bi-house"></i>
+              <i className="bi bi-house"></i>
             </Nav.Link>
             {isAdmin ? (
               <Nav.Link href="/Upload Food" className="nav_link_icon">
@@ -59,7 +59,7 @@ function Navbars() {
                         src={
                           localStorage.getItem("profileimg").length > 10
                             ? img_profile
-                            : "https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280.jpg"
+                            : "https://i.postimg.cc/vZK6pQjx/profilepicture.png"
                         }
                         alt=""
                       ></img>
@@ -76,8 +76,8 @@ function Navbars() {
                     </Button>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/Update">
-                    Update Profile
+                  <NavDropdown.Item href="/User details">
+                    User
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </NavDropdown>

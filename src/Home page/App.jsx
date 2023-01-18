@@ -219,7 +219,7 @@ function App() {
       rating: 0,
       review: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       console.log(values.rating);
       axios
         .post(
@@ -239,6 +239,7 @@ function App() {
           getComment(comment_foodId);
           getAllfood();
         });
+      resetForm();
     },
   });
   // Review form end
@@ -246,8 +247,12 @@ function App() {
     getAllfood();
   }, []);
   return (
-    <div  style={{paddingBottom: "20px"}}>
+    <div style={{ paddingBottom: "20px" }}>
       <Navbars />
+      <h2 className="container-fluid greetings" >
+        Bon appétit, {localStorage.getItem("username")}! Let's start Scrolling
+        your delicious meals.
+      </h2>
       <div className="container my-3">
         {all_foods.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
@@ -283,7 +288,7 @@ function App() {
                           }
                           style={{
                             fontSize: "25px",
-                            webkitTextStroke: "0.5px",
+                            WebkitTextStroke: "0.5px",
                           }}
                         >
                           {item.totalLikes}
