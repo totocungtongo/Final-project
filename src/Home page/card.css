@@ -23,7 +23,7 @@
 	 overflow: hidden;
 	 position: relative;
 	 color: #fff;
-}
+ }
  .postcard.light {
 	 background-color: #e1e5ea;
 }
@@ -71,6 +71,7 @@
 	 text-align: justify;
 	 height: 100%;
 	 color: #18151f;
+	 
 }
  .postcard .postcard__tagbox {
 	 display: flex;
@@ -82,13 +83,11 @@
 }
  .postcard .postcard__tagbox .tag__item {
 	 display: inline-block;
-	 /* background: rgba(83, 83, 83, 0.4); */
 	 border-radius: 3px;
 	 padding: 2.5px 10px;
 	 margin: 0 5px 5px 0;
 	 cursor: default;
 	 user-select: none;
-	 /* transition: background-color 0.3s; */
 }
 .tag_item_button{
   border:none;
@@ -103,7 +102,7 @@
 	 right: 0;
 	 bottom: 0;
 	 left: 0;
-	 background-image: linear-gradient(-70deg, #424242, transparent 50%);
+	 background-image: linear-gradient(-70deg, #424242);
 	 opacity: 1;
 	 border-radius: 10px;
 }
@@ -129,6 +128,9 @@
 		 padding: 3rem;
 		 width: 100%;
 	}
+	 .postcard .postcard__preview-txt {
+	 max-height: none;
+}
 	 .postcard .media.postcard__text:before {
 		 content: "";
 		 position: absolute;
@@ -181,7 +183,6 @@
 }
  .red .postcard__title:hover {
 	 color: #bd150b;
-	 transition: ease 0.5s;
 }
  .red .postcard__bar {
 	 background-color: #bd150b;
@@ -192,12 +193,17 @@
  .red:nth-child(2n)::before {
 	 background-image: linear-gradient(30deg, rgba(189, 21, 11, 0.1), transparent 50%);
 }
+ 
  @media screen and (min-width: 769px) {
+
 	 .red::before {
 		 background-image: linear-gradient(-80deg, rgba(189, 21, 11, 0.1), transparent 50%);
 	}
 	 .red:nth-child(2n)::before {
 		 background-image: linear-gradient(80deg, rgba(189, 21, 11, 0.1), transparent 50%);
 	}
+
 }
+ 
+
  

@@ -1,4 +1,4 @@
-import "../App page/card.css";
+import "../Home page/card.css";
 import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -117,7 +117,7 @@ function Likefood() {
     getLikefood();
   }, []);
   return (
-    <>
+    <div className="background">
       <Navbars />
      <div className="container py-2">
         {liked_food.map((item, index) => {
@@ -263,7 +263,7 @@ function Likefood() {
           </Form>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 

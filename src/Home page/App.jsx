@@ -246,7 +246,7 @@ function App() {
     getAllfood();
   }, []);
   return (
-    <>
+    <div  style={{paddingBottom: "20px"}}>
       <Navbars />
       <div className="container my-3">
         {all_foods.map((item, index) => {
@@ -277,7 +277,9 @@ function App() {
                       >
                         <i
                           className={
-                            item.isLike ? "bi bi-heart-fill reds" : "bi bi-heart"
+                            item.isLike
+                              ? "bi bi-heart-fill reds"
+                              : "bi bi-heart"
                           }
                           style={{
                             fontSize: "25px",
@@ -502,7 +504,7 @@ function App() {
         ;<Modal.Footer></Modal.Footer>
       </Modal>
       {/* MODAL UPDATE FOOD  END*/}
-    </>
+    </div>
   );
 }
 

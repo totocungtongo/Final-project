@@ -1,3 +1,4 @@
+import "./login.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbars from "../Component/Navbar";
@@ -64,52 +65,57 @@ function Login() {
     },
   });
   return (
-    <>
+    <div className="background">
       <Navbars />
       {!loading ? (
-        <Form onSubmit={login_form.handleSubmit} className="form_position">
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="email">Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              name="email"
-              onChange={login_form.handleChange}
-              onBlur={login_form.handleBlur}
-              value={login_form.values.email}
-            />
-          </Form.Group>
-          {login_form.touched.email && login_form.errors.email ? (
-            <div style={{ color: "red" }}>{login_form.errors.email}</div>
-          ) : null}
-          <br />
+        <div className="container my-3 background">
+          <Form
+            onSubmit={login_form.handleSubmit}
+            className="form_position p-3"
+          >
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="email">Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                onChange={login_form.handleChange}
+                onBlur={login_form.handleBlur}
+                value={login_form.values.email}
+              />
+            </Form.Group>
+            {login_form.touched.email && login_form.errors.email ? (
+              <div style={{ color: "red" }}>{login_form.errors.email}</div>
+            ) : null}
+            <br />
 
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="password">Password</Form.Label>
-            <Form.Control
-              name="password"
-              type="password"
-              autoComplete="off"
-              placeholder="Password"
-              onChange={login_form.handleChange}
-              onBlur={login_form.handleBlur}
-              value={login_form.values.password}
-            />
-          </Form.Group>
-          {login_form.touched.password && login_form.errors.password ? (
-            <div style={{ color: "red" }}>{login_form.errors.password}</div>
-          ) : null}
-          <a href="/Register"> Have you sign up ? Sign up here!</a>
-          <br />
-          <Button variant="primary" type="submit">
-            Sign in!
-          </Button>
-        </Form>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="password">Password</Form.Label>
+              <Form.Control
+                name="password"
+                type="password"
+                autoComplete="off"
+                placeholder="Password"
+                onChange={login_form.handleChange}
+                onBlur={login_form.handleBlur}
+                value={login_form.values.password}
+              />
+            </Form.Group>
+            {login_form.touched.password && login_form.errors.password ? (
+              <div style={{ color: "red" }}>{login_form.errors.password}</div>
+            ) : null}
+            <a href="/Register"> Have you sign up ? Sign up here!</a>
+            <br />
+            <Button variant="primary" type="submit">
+              Sign in!
+            </Button>
+          </Form>
+        </div>
       ) : (
         // <Loader />
         <Spinner animation="border" role="status" className="loading"></Spinner>
       )}
-    </>
+    </div>
   );
 }
 export default Login;

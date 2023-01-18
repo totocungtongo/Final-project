@@ -45,7 +45,7 @@
   width: 80px;
   height: 80px;
   border: 8px solid #c11c08;
-  border-top-color: #fff;
+  border-top-color: rgba(255,255,255,.01);
   position: absolute;
   top: 50%;
   left: 50%;

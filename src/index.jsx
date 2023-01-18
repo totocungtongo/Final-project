@@ -11,7 +11,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Cookies from "js-cookie";
-import App from "./App page/App";
+import App from "./Home page/App";
 import Login from "./Login page/Login";
 import Register from "./Register page/Register";
 import Account from "./Profile page/Account";

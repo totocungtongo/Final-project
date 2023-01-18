@@ -63,7 +63,7 @@ function Navbars() {
                         }
                         alt=""
                       ></img>
-                      <span style={{ fontFamily: "Open Sans", color: "white" }}>
+                      <span style={{ fontFamily: "Open Sans", color: "black" }}>
                         {username}
                       </span>
                     </Fragment>

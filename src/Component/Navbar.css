@@ -1,6 +1,4 @@
 .navbar_container {
-display: flex;
-align-items: center;
 max-height: 45px;
 }
 .navbar_text{
@@ -31,8 +29,6 @@ padding-top: 11px;
 }
 @media  screen and (max-width: 992px) {
     .navbar_container {
-display: flex;
-align-items: center;
 max-height: none;
 }
 .nav_logo{
