@@ -1,4 +1,3 @@
-import "./login.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbars from "../Component/Navbar";
