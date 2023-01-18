@@ -18,6 +18,7 @@ import Account from "./Profile page/Update";
 import Creatfood from "./CreateFood page/Createfood";
 import Likefood from "./LikedFood page/Likedfood";
 import Userdetails from "./Component/Userdetails";
+import Alluser from "./Alluser page/Alluser";
 const AppWrapper = () => {
   // disini di set true dulu karena ada bug page login ter navigasi di route walaupun kondisi authenticated true
   const [authenticated, setAuthenticated] = useState(undefined);
@@ -106,6 +107,16 @@ const AppWrapper = () => {
           element={
             authenticated === undefined ? null : authenticated ? (
               <Userdetails />
+            ) : (
+              <Navigate to={"/"} replace />
+            )
+          }
+        />
+        <Route
+          path="/All user"
+          element={
+            isAdmin === undefined ? null : isAdmin ? (
+              <Alluser />
             ) : (
               <Navigate to={"/"} replace />
             )

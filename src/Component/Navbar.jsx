@@ -21,6 +21,9 @@ function Navbars() {
       window.location.assign("/Login");
     }
   };
+  const handleImageError = (ev) => {
+    ev.target.src = "https://i.postimg.cc/vZK6pQjx/profilepicture.png";
+  };
   return (
     <Navbar
       expand="lg"
@@ -55,9 +58,10 @@ function Navbars() {
                   title={
                     <Fragment>
                       <img
+                        onError={handleImageError}
                         className="img_profile"
                         src={
-                          localStorage.getItem("profileimg").length > 10
+                          img_profile !== null
                             ? img_profile
                             : "https://i.postimg.cc/vZK6pQjx/profilepicture.png"
                         }
@@ -76,10 +80,9 @@ function Navbars() {
                     </Button>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/User details">
-                    User
-                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/User details">User</NavDropdown.Item>
                   <NavDropdown.Divider />
+                  <NavDropdown.Item href="/All user">All User</NavDropdown.Item>
                 </NavDropdown>
               </>
             ) : null}
