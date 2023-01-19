@@ -119,7 +119,10 @@ function Likefood() {
   return (
     <div className="background">
       <Navbars />
-     <div className="container py-2">
+      <h2 className="container-fluid greetings">
+        This is your favorite {localStorage.getItem("username")}! .
+      </h2>
+      <div className="container py-2">
         {liked_food.map((item, index) => {
           let eachIngridients = item.ingredients.join(" ");
           return (
@@ -154,7 +157,6 @@ function Likefood() {
                           }
                           style={{ fontSize: "25px" }}
                         >
-  
                           {item.totalLikes}
                         </i>
                       </Button>

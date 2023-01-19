@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
-import "./Navbar.css" ;
+import "./Navbar.css";
 import { Fragment } from "react";
 function Navbars() {
   const isLoggedin = Boolean(Cookies.get("jwtToken"));
@@ -82,7 +82,11 @@ function Navbars() {
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/User details">User</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  {isAdmin?  <NavDropdown.Item href="/All user">All User</NavDropdown.Item>: null}
+                  {isAdmin ? (
+                    <NavDropdown.Item href="/All user">
+                      All User
+                    </NavDropdown.Item>
+                  ) : null}
                 </NavDropdown>
               </>
             ) : null}
