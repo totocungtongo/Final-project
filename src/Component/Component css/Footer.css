@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+
+.container-footer {
+  margin-top: 101px;
+  color: #000 !important;
+ position: relative;
+ z-index: 1 ;
+}
+.background_none {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+.card_footer {
+  color: #5a4e4e!important;
+  align-items: center !important;
+  background: transparent;
+}
+
+.h2_Footer {
+  font-size: 60px;
+}
+
+.h5_footer {
+  font-size: 25px;
+}
+
+.bi_footer{
+  cursor: pointer;
+  font-size: 21px;
+  margin: 5px 10px 5px 10px !important;
+}
+
+.li_footer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.imgs {
+  vertical-align: middle !important;
+  width: 100px;
+  height: auto;
+}
+
+.li_footer:first-child {
+  font-size: 21px !important;
+  font-weight: bold;
+  margin-bottom: calc(
+    40px + (48 - 40) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+  color: #5a4e4e!important;
+}
+
+footer {
+  color: #5a4e4e !important;
+}
+
+.social {
+  position: relative;
+  left: -10px;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+  color: green;
+  font-weight: bold;
+}

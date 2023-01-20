@@ -12,7 +12,9 @@ body {
     rgba(224, 119, 101, 1) 100%
   ) !important;
 }
-
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&family=Open+Sans:wght@500&display=swap');
+/* fontEnd */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Navbars from "../Component/Navbar";
 import * as Yup from "yup";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -132,7 +131,6 @@ function Register() {
   });
   return (
     <>
-      <Navbars />
       {!loading ? (
         <Form className="form_position" onSubmit={register_form.handleSubmit}>
           <Form.Group>

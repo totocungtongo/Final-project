@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Navbars from "../Component/Navbar";
 import * as Yup from "yup";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -64,10 +63,8 @@ function Login() {
     },
   });
   return (
-    <div className="background">
-      <Navbars />
+    < >
       {!loading ? (
-        <div className="container my-3 background">
           <Form
             onSubmit={login_form.handleSubmit}
             className="form_position p-3"
@@ -109,12 +106,11 @@ function Login() {
               Sign in!
             </Button>
           </Form>
-        </div>
       ) : (
         // <Loader />
         <Spinner animation="border" role="status" className="loading"></Spinner>
       )}
-    </div>
+    </>
   );
 }
 export default Login;

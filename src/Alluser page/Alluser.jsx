@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
-import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Cookies from "js-cookie";
 import "./Alluser.css"
+import Footers from "../Component/Footer";
 function Alluser() {
   const [all_user, setAlluser] = useState([]);
   const getAlluser = async () => {
@@ -27,7 +27,6 @@ const handleImageError = (ev) => { ev.target.src = "https://i.postimg.cc/vZK6pQj
   }, []);
   return (
     <>
-      <Navbars />
       <div class="container profile-page mt-5">
         <div class="row">
           {all_user.map((item, index) => {
@@ -68,6 +67,7 @@ const handleImageError = (ev) => { ev.target.src = "https://i.postimg.cc/vZK6pQj
           })}
         </div>
       </div>
+      <Footers/>
     </>
   );
 }

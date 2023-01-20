@@ -1,5 +1,4 @@
 import "../Home page/card.css";
-import Navbars from "../Component/Navbar";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -10,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useFormik } from "formik";
 import ReactStars from "react-rating-stars-component";
+import Footers from "../Component/Footer";
 
 function Likefood() {
   const [liked_food, setLikedfood] = useState([]);
@@ -70,19 +70,19 @@ function Likefood() {
   };
   // toggleLike end
   // toggle comment
-   const getComment = (foodId) => {
-     handleShow();
-     setCommentfoodId(foodId);
-     axios
-       .get(`${process.env.REACT_APP_BASE_URL}/api/v1/food-rating/${foodId}`, {
-         headers: {
-           apiKey: `${process.env.REACT_APP_API_KEY}`,
-         },
-       })
-       .then((res) => {
-         setFoodrating(res.data.data);
-       });
-   };
+  const getComment = (foodId) => {
+    handleShow();
+    setCommentfoodId(foodId);
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/api/v1/food-rating/${foodId}`, {
+        headers: {
+          apiKey: `${process.env.REACT_APP_API_KEY}`,
+        },
+      })
+      .then((res) => {
+        setFoodrating(res.data.data);
+      });
+  };
   // toggle comment end
   // Review form
   const review_form = useFormik({
@@ -118,8 +118,7 @@ function Likefood() {
   }, []);
   return (
     <div className="background">
-      <Navbars />
-      <h2 className="container-fluid greetings">
+      <h2 className="container-fluid greetings" style={{ marginTop: "30px" }}>
         This is your favorite {localStorage.getItem("username")}! .
       </h2>
       <div className="container py-2">
@@ -146,7 +145,7 @@ function Likefood() {
                     <li className="tag__item">
                       <Button
                         variant="none"
-                        className="likeButton"
+                        className="tag_item_button"
                         onClick={() => toggleLike(item.id, item.isLike)}
                       >
                         <i
@@ -162,10 +161,7 @@ function Likefood() {
                       </Button>
                     </li>
                     <li className="tag__item">
-                      <Button
-                        variant="none"
-                        className="d-flex justify-content-center"
-                      >
+                      <Button variant="none" className="tag_item_button">
                         <i
                           className="bi bi-star-fill align-self-center"
                           style={{ fontSize: "25px" }}
@@ -179,7 +175,7 @@ function Likefood() {
                     <li className="tag__item">
                       <Button
                         variant="none"
-                        className="Review_Button"
+                        className="tag_item_button"
                         onClick={() => getComment(item.id)}
                       >
                         <i
@@ -265,6 +261,7 @@ function Likefood() {
           </Form>
         </Modal.Footer>
       </Modal>
+      <Footers />
     </div>
   );
 }

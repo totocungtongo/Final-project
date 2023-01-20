@@ -19,11 +19,10 @@ import Creatfood from "./CreateFood page/Createfood";
 import Likefood from "./LikedFood page/Likedfood";
 import Userdetails from "./Component/Userdetails";
 import Alluser from "./Alluser page/Alluser";
+import Navbars from "./Component/Navbar";
 const AppWrapper = () => {
-  // disini di set true dulu karena ada bug page login ter navigasi di route walaupun kondisi authenticated true
   const [authenticated, setAuthenticated] = useState(undefined);
   const [isAdmin, setIsadmin] = useState(undefined);
-
   useEffect(() => {
     const token = Boolean(Cookies.get("jwtToken"));
     const isAdmin = Boolean(Cookies.get("user_role") === "admin");
@@ -32,102 +31,105 @@ const AppWrapper = () => {
     } else {
       setAuthenticated(false);
     }
-    if (isAdmin){
-      setIsadmin(true)
-    }else{
-   setIsadmin(false);
+    if (isAdmin) {
+      setIsadmin(true);
+    } else {
+      setIsadmin(false);
     }
   }, []);
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to={"/Home"} replace />} />
-        <Route
-          path="/Home"
-          element={
-            authenticated === undefined ? null : authenticated ? (
-              <App />
-            ) : (
-              <Login />
-            )
-          }
-        />
-        <Route
-          path="/Register"
-          element={
-            authenticated === undefined ? null : authenticated ? (
-              <Navigate to={"/"} replace />
-            ) : (
-              <Register />
-            )
-          }
-        />
-        <Route
-          path="/Login"
-          element={
-            authenticated === undefined ? null : authenticated ? (
-              <Navigate to={"/"} replace />
-            ) : (
-              <Login />
-            )
-          }
-        />
-        <Route
-          path="/Update"
-          element={
-            authenticated === undefined ? null : authenticated ? (
-              <Account />
-            ) : (
-              <Navigate to={"/"} replace />
-            )
-          }
-        />
-        <Route
-          path="/Upload Food"
-          element={
-            isAdmin === undefined ? null : isAdmin ? (
-              <Creatfood />
-            ) : (
-              <Navigate to={"/"} replace />
-            )
-          }
-        />
-        <Route
-          path="/Liked Food"
-          element={
-            authenticated === undefined ? null : authenticated ? (
-              <Likefood />
-            ) : (
-              <Navigate to={"/"} replace />
-            )
-          }
-        />
-        <Route
-          path="/User details"
-          element={
-            authenticated === undefined ? null : authenticated ? (
-              <Userdetails />
-            ) : (
-              <Navigate to={"/"} replace />
-            )
-          }
-        />
-        <Route
-          path="/All user"
-          element={
-            isAdmin === undefined ? null : isAdmin ? (
-              <Alluser />
-            ) : (
-              <Navigate to={"/"} replace />
-            )
-          }
-        />
-        <Route
-          path="*"
-          element={<p style={{ color: "black" }}>Halaman Tidak Ditemukan</p>}
-        />
-      </Routes>
-    </Router>
+    <>
+      <Navbars />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to={"/Home"} replace />} />
+          <Route
+            path="/Home"
+            element={
+              authenticated === undefined ? null : authenticated ? (
+                <App />
+              ) : (
+                <Login />
+              )
+            }
+          />
+          <Route
+            path="/Register"
+            element={
+              authenticated === undefined ? null : authenticated ? (
+                <Navigate to={"/"} replace />
+              ) : (
+                <Register />
+              )
+            }
+          />
+          <Route
+            path="/Login"
+            element={
+              authenticated === undefined ? null : authenticated ? (
+                <Navigate to={"/"} replace />
+              ) : (
+                <Login />
+              )
+            }
+          />
+          <Route
+            path="/Update"
+            element={
+              authenticated === undefined ? null : authenticated ? (
+                <Account />
+              ) : (
+                <Navigate to={"/"} replace />
+              )
+            }
+          />
+          <Route
+            path="/Upload Food"
+            element={
+              isAdmin === undefined ? null : isAdmin ? (
+                <Creatfood />
+              ) : (
+                <Navigate to={"/"} replace />
+              )
+            }
+          />
+          <Route
+            path="/Liked Food"
+            element={
+              authenticated === undefined ? null : authenticated ? (
+                <Likefood />
+              ) : (
+                <Navigate to={"/"} replace />
+              )
+            }
+          />
+          <Route
+            path="/User details"
+            element={
+              authenticated === undefined ? null : authenticated ? (
+                <Userdetails />
+              ) : (
+                <Navigate to={"/"} replace />
+              )
+            }
+          />
+          <Route
+            path="/All user"
+            element={
+              isAdmin === undefined ? null : isAdmin ? (
+                <Alluser />
+              ) : (
+                <Navigate to={"/"} replace />
+              )
+            }
+          />
+          <Route
+            path="*"
+            element={<p style={{ color: "black" }}>Halaman Tidak Ditemukan</p>}
+          />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

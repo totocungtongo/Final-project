@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Navbars from "../Component/Navbar";
+import Form from "react-bootstrap/Form"; 
 import * as Yup from "yup";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -93,7 +92,6 @@ function Creatfood() {
   });
   return (
     <>
-      <Navbars />
       {!loading ? (
         <Form className="form_position" onSubmit={create_form.handleSubmit}>
           <Form.Group className="mb-3">

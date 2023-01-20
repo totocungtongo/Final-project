@@ -1,6 +1,6 @@
 import "./App.css";
 import "./card.css";
-import Navbars from "../Component/Navbar";
+import Footers from "../Component/Footer";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -14,7 +14,9 @@ import ReactStars from "react-rating-stars-component";
 import Dropdown from "react-bootstrap/Dropdown";
 import * as Yup from "yup";
 
+
 function App() {
+   const [isAdmin, setIsadmin] = useState(undefined);
   const [all_foods, setAllfood] = useState([]);
   const [food_rating, setFoodrating] = useState([]);
   const [food_update, setFoodupdate] = useState([]);
@@ -29,7 +31,6 @@ function App() {
     const value = event.target.value;
     setFieldValue("ingredients", value.split(" "));
   };
-  const isAdmin = Boolean(Cookies.get("user_role") === "admin");
   //get food data
   const getAllfood = () => {
     axios
@@ -245,11 +246,16 @@ function App() {
   // Review form end
   useEffect(() => {
     getAllfood();
+    const isAdmin = Boolean(Cookies.get("user_role") === "admin");
+      if (isAdmin) {
+        setIsadmin(true);
+      } else {
+        setIsadmin(false);
+      }
   }, []);
   return (
     <div style={{ paddingBottom: "20px" }}>
-      <Navbars />
-      <h2 className="container-fluid greetings" >
+      <h2 className="container-fluid greetings" style={{marginTop: "30px"}} >
         Bon appétit, {localStorage.getItem("username")}! Let's start Scrolling
         your delicious meals.
       </h2>
@@ -509,6 +515,7 @@ function App() {
         ;<Modal.Footer></Modal.Footer>
       </Modal>
       {/* MODAL UPDATE FOOD  END*/}
+      <Footers/>
     </div>
   );
 }

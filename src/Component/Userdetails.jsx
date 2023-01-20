@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbars from "../Component/Navbar";
-import "./Userdetails.css";
+import "./Component css/Userdetails.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -32,7 +31,6 @@ function Userdetails() {
    }, []);
     return (
       <>
-        <Navbars />
         <div className="container mt-5 container_profile">
           <div className="row d-flex justify-content-center">
             <div className="col-md-7">

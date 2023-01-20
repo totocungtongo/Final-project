@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
-import "./Navbar.css";
+import "./Component css/Navbar.css";
 import { Fragment } from "react";
 function Navbars() {
   const isLoggedin = Boolean(Cookies.get("jwtToken"));
