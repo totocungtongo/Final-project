@@ -1,4 +1,4 @@
-import "../Home page/card.css";
+import "../Home_page/card.css";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";

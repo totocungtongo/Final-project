@@ -11,14 +11,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import Cookies from "js-cookie";
-import App from "./Home page/App";
-import Login from "./Login page/Login";
-import Register from "./Register page/Register";
-import Account from "./Update profile page/Update";
-import Creatfood from "./CreateFood page/Createfood";
-import Likefood from "./LikedFood page/Likedfood";
+import App from "./Home_page/App";
+import Login from "./Login_page/Login";
+import Register from "./Register_page/Register";
+import Account from "./Update_profile_page/Update";
+import Creatfood from "./CreateFood_page/Createfood";
+import Likefood from "./LikedFood_page/Likedfood";
 import Userdetails from "./Component/Userdetails";
-import Alluser from "./Alluser page/Alluser";
+import Alluser from "./Alluser_page/Alluser";
 import Navbars from "./Component/Navbar";
 const AppWrapper = () => {
   const [authenticated, setAuthenticated] = useState(undefined);
