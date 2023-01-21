@@ -214,7 +214,7 @@ function Register() {
                 register_form.setFieldValue("role", e.target.value);
               }}
             >
-              <option>Open this select menu</option>
+              <option>Choose role here!</option>
               <option value="user">User</option>
               <option value="general">General</option>
               <option value="admin">Admin</option>

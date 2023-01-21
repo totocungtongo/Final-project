@@ -22,7 +22,7 @@ function Creatfood() {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .min(5, "Minimum 5 characters")
+        .min(3, "Minimum 3 characters")
         .required("Please enter your Food Name"),
       description: Yup.string()
         .min(20, "Minimum 20 characters")
