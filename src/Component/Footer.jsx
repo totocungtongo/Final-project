@@ -86,7 +86,7 @@ function Footers() {
                           </li>
                           {isAdmin ? (
                             <li className="li_footer">
-                              <a href="/Upload" style={{ color: "black" }}>
+                              <a href="/Upload food" style={{ color: "black" }}>
                                 Upload food
                               </a>
                             </li>
