@@ -7,9 +7,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Spinner } from "react-bootstrap";
 
-
 function Account() {
   const [loading, setLoading] = useState(false);
+  const isAdmin = Boolean(Cookies.get("user_role") === "admin");
   const account_form = useFormik({
     initialValues: {
       name: "",
@@ -69,7 +69,7 @@ function Account() {
               localStorage.setItem("profileimg", Cookies.get("image_uploaded"));
               axios.post(
                 `${
-                  process.env.REACT_APP_API_KEY
+                  process.env.REACT_APP_BASE_URL
                 }/api/v1/update-user-role/${Cookies.get("user_id")}`,
                 { role: values.role },
                 {
@@ -134,25 +134,29 @@ function Account() {
               <div style={{ color: "red" }}>{account_form.errors.name}</div>
             ) : null}
             <br />
-            <Form.Group>
-              <Form.Label htmlFor="role">Choose Your role </Form.Label>
-              <Form.Select
-                aria-label="Role select"
-                onChange={(e) => {
-                  account_form.setFieldValue("role", e.target.value);
-                }}
-              >
-                <option>Open this select menu</option>
-                <option value="user">User</option>
-                <option value="general">General</option>
-                <option value="admin">Admin</option>
-              </Form.Select>
-            </Form.Group>
-            {account_form.touched.role && account_form.errors.role ? (
-              <div style={{ color: "red", marginBottom: "5px" }}>
-                <i className="bi bi-exclamation-diamond-fill"></i>{" "}
-                {account_form.errors.role}
-              </div>
+            {isAdmin ? (
+              <>
+                <Form.Group>
+                  <Form.Label htmlFor="role">Choose Your role </Form.Label>
+                  <Form.Select
+                    aria-label="Role select"
+                    onChange={(e) => {
+                      account_form.setFieldValue("role", e.target.value);
+                    }}
+                  >
+                    <option>Open this select menu</option>
+                    <option value="user">User</option>
+                    <option value="general">General</option>
+                    <option value="admin">Admin</option>
+                  </Form.Select>
+                </Form.Group>
+                {account_form.touched.role && account_form.errors.role ? (
+                  <div style={{ color: "red", marginBottom: "5px" }}>
+                    <i className="bi bi-exclamation-diamond-fill"></i>{" "}
+                    {account_form.errors.role}
+                  </div>
+                ) : null}
+              </>
             ) : null}
             <Form.Group className="mb-3 ">
               <Form.Label>Upload your image here ! </Form.Label>
@@ -186,7 +190,10 @@ function Account() {
               </div>
             ) : null}
             <br />
-            <div className="d-flex justify-content-center " style={{gap: "10px"}}>
+            <div
+              className="d-flex justify-content-center "
+              style={{ gap: "10px" }}
+            >
               <Button variant="danger">
                 <a href="/User details" style={{ color: "white" }}>
                   Cancel
