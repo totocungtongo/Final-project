@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 import App from "./Home page/App";
 import Login from "./Login page/Login";
 import Register from "./Register page/Register";
-import Account from "./Profile page/Update";
+import Account from "./Update profile page/Update";
 import Creatfood from "./CreateFood page/Createfood";
 import Likefood from "./LikedFood page/Likedfood";
 import Userdetails from "./Component/Userdetails";

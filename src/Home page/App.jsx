@@ -63,7 +63,7 @@ function App() {
           )
           .then(() => {
             getAllfood();
-          })
+          })  
       : axios
           .post(
             `${process.env.REACT_APP_BASE_URL}/api/v1/unlike`,
@@ -255,7 +255,7 @@ function App() {
   }, []);
   return (
     <div style={{ paddingBottom: "20px" }}>
-      <h2 className="container-fluid greetings" style={{marginTop: "30px"}} >
+      <h2 className="container-fluid greetings" style={{ marginTop: "30px" }}>
         Bon appétit, {localStorage.getItem("username")}! Let's start Scrolling
         your delicious meals.
       </h2>
@@ -507,15 +507,23 @@ function App() {
                 value={update_food_form.values.ingredients.join(" ")}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <div
+              className="d-flex justify-content-center "
+              style={{ gap: "10px" }}
+            >
+              <Button variant="danger" onClick={handleClose2}>             
+                  Cancel
+              </Button>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
         ;<Modal.Footer></Modal.Footer>
       </Modal>
       {/* MODAL UPDATE FOOD  END*/}
-      <Footers/>
+      <Footers />
     </div>
   );
 }
