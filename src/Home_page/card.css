@@ -90,7 +90,8 @@
 	 user-select: none;
 }
 .tag_item_button{
-  border:none;
+  border:none !important;
+  border-width: none !important;
 }
  .postcard .postcard__tagbox .tag__item:hover {
 	 color: gray;
@@ -180,9 +181,6 @@
 /* COLORS */
  .postcard .postcard__tagbox .red.play:hover {
 	 background: #bd150b;
-}
- .red .postcard__title:hover {
-	 color: #bd150b;
 }
  .red .postcard__bar {
 	 background-color: #bd150b;

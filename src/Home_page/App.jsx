@@ -270,7 +270,7 @@ function App() {
                   src={`${item.imageUrl}`}
                 ></CardImg>
                 <Card.Body className="postcard__text t-dark">
-                  <Card.Title className="postcard__title red">
+                  <Card.Title className="postcard__title">
                     {item.name}
                   </Card.Title>
                   <div className="postcard__bar"></div>
@@ -316,7 +316,7 @@ function App() {
                     <li className="tag__item">
                       <Button
                         variant="none"
-                        className="tag_item_button "
+                        className="tag_item_button"
                         onClick={() => getComment(item.id)}
                       >
                         <i
@@ -327,8 +327,12 @@ function App() {
                     </li>
                     {isAdmin ? (
                       <li className="tag__item">
-                        <Dropdown className="tag_item_button">
-                          <Dropdown.Toggle variant="none" id="dropdown-basic">
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant="none"
+                            id="dropdown-basic"
+                            className="tag_item_button"
+                          >
                             <i
                               className="bi bi-three-dots-vertical"
                               style={{ fontSize: "25px" }}

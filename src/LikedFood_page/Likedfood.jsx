@@ -132,7 +132,7 @@ function Likefood() {
                   src={`${item.imageUrl}`}
                 ></CardImg>
                 <Card.Body className="postcard__text t-dark">
-                  <Card.Title className="postcard__title red">
+                  <Card.Title className="postcard__title">
                     {item.name}
                   </Card.Title>
                   <div className="postcard__bar"></div>
